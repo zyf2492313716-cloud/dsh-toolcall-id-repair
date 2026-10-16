@@ -56,6 +56,23 @@ together:
 looks repaired, then fails on the next append. A previous repair attempt in the
 wild made exactly this mistake across five sessions.
 
+## Suggested fix for the harness itself
+
+The inconsistency is visible inside a single file. In
+`packages/llm/llm/src/assistant-stream.ts`, two records carry the same data
+under different rules:
+
+| Record | Line | Rule for `id` |
+|---|---|---|
+| `tool-call-delta` | 138 | `if (chunk.id.length === 0 \|\| chunk.name === '')` — kept as a chunk, empty id allowed |
+| `tool-call-chunks` | 477 | `if (typeof record.id !== 'string' \|\| record.id.length === 0) throw` — non-empty required |
+
+So the compact form forbids what the delta form permits, and only the delta form
+is reachable from a live provider stream. Tightening line 138 to reject an empty
+id — or synthesizing one there — would close the bug at its source. Until that
+lands, this plugin does the same job from the `llm/stream` waterfall, which is
+the supported interception point.
+
 ## Install the guard
 
 Copy `tools/guard-plugin.js` somewhere permanent, then register it in your
