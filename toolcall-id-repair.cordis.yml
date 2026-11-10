@@ -1,0 +1,4 @@
+# dsh-toolcall-id-repair cordis patch
+- insert:
+    - id: toolcall-id-repair
+      name: '@dsh-local/dsh-toolcall-id-repair'

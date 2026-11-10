@@ -167,6 +167,52 @@ For reference, the failure always looks the same in the log: the turn ends on a
 tool-call block in that assistant message shares the empty id. One message, all
 calls blank — not a per-call flake.
 
+## Plugin Installation (DSH Store / Cordis)
+
+This repository is packaged as a standard DeepSeek Harness plugin (`@dsh-local/dsh-toolcall-id-repair`).
+
+### DSH Store
+
+Install directly from DSH Store or by searching `dsh-toolcall-id-repair`.
+
+### Manual Cordis Installation
+
+Add the bundle patch to `~/.dsh/cordis.patch.yml`:
+
+```yaml
+- insert:
+    - id: toolcall-id-repair
+      name: '@dsh-local/dsh-toolcall-id-repair'
+```
+
+---
+
+## Permissions & Safety Boundary
+
+| Permission | Level | Details |
+|---|---|---|
+| **Files** | None | Pure in-memory stream normalizer. Zero filesystem reads or writes. |
+| **Network** | None | No outbound requests, fetch, or sockets. |
+| **Commands** | None | No subprocesses spawned. |
+| **Credentials** | None | Does not read environment variables, API keys, or tokens. |
+
+- **Security Rating**: Low risk, static stream transform.
+- **Profiles**: `web`, `desktop`, `cli`.
+- **System Requirements**: Node `^22.19 || >=24`, DSH `>=0.1.2`.
+
+---
+
+## Compatibility Evidence
+
+| DSH Release | Status | Evidence |
+|---|---|---|
+| `0.2.1-rc.5` | compatible | In daily production use on local DSH host. |
+| `0.2.2-alpha.2` | compatible | Verified against published npm closure (`ctx.on('llm/stream')` waterfall contract unchanged). |
+| `0.2.2-alpha.3` | compatible | Verified against published npm closure. |
+| `0.2.2-rc.1` | compatible | Verified against published npm closure. |
+
+---
+
 ## License
 
 MIT. The harness is MIT-licensed; the file paths and invariants quoted above come

@@ -1,0 +1,50 @@
+{
+  "name": "@dsh-local/dsh-toolcall-id-repair",
+  "version": "0.1.0",
+  "description": "DSH 工具调用空 ID 自动修复守卫：在 llm/stream 拦截并补全缺失的 tool_call id，根治 format v4 会话锁死",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "toolcall-id-repair.cordis.yml"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zyf2492313716-cloud/dsh-toolcall-id-repair.git"
+  },
+  "engines": {
+    "node": "^22.19 || >=24",
+    "dsh": ">=0.1.2"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "keywords": [
+    "experimental",
+    "reliability",
+    "repair",
+    "toolcall"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "toolcall-id-repair.cordis.yml"
+    },
+    "compatibility": {
+      "dsh": ">=0.1.2",
+      "profiles": [
+        "web"
+      ],
+      "dshReleases": {
+        "0.2.1-rc.5": "compatible",
+        "0.2.2-alpha.2": "compatible",
+        "0.2.2-alpha.3": "compatible",
+        "0.2.2-rc.1": "compatible"
+      }
+    }
+  },
+  "license": "MIT"
+}
