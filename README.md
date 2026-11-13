@@ -215,5 +215,9 @@ Add the bundle patch to `~/.dsh/cordis.patch.yml`:
 
 ## License
 
-MIT. The harness is MIT-licensed; the file paths and invariants quoted above come
-from that project.
+MIT — see [LICENSE](./LICENSE).
+
+This project's own code is released under the MIT License. The harness itself is
+MIT-licensed as well; the file paths and invariants quoted above come from that
+project, and the guard hooks into its published extension points rather than
+patching it.

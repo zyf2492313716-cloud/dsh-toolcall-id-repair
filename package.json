@@ -1,6 +1,6 @@
 {
   "name": "@dsh-local/dsh-toolcall-id-repair",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DSH 工具调用空 ID 自动修复守卫：在 llm/stream 拦截并补全缺失的 tool_call id，根治 format v4 会话锁死",
   "type": "module",
   "main": "lib/index.js",
